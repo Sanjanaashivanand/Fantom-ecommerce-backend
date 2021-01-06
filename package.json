@@ -12,10 +12,13 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
     "express-handlebars": "^5.2.0",
     "express-jwt": "^5.3.1",
     "express-validator": "^6.9.0",
+    "formidable": "^1.2.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.6",
     "smart-id": "^0.4.0"

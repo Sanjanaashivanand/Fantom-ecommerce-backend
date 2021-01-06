@@ -11,6 +11,7 @@ var router = express.Router();
 const authenticationRoutes = require("./routes/authentication");
 const UserRoutes = require("./routes/user")
 const CategoryRoutes = require("./routes/category")
+const ProductRoutes=require("./routes/product")
 
 //MIDDLEWARE
 app.use(cors());
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use("/api",authenticationRoutes);
 app.use("/api",UserRoutes);
 app.use("/api/category",CategoryRoutes);
+app.use("/api/product",ProductRoutes);
 
 port=9000
 

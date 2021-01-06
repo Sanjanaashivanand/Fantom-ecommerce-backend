@@ -26,7 +26,7 @@ mysqlConnection.connect((err)=>{
         });
 
         //CREATING CATEGORY TABLE
-        const categorytable = "create table if not exists category(category_id varchar(25) primary key,category_name varchar(40))";
+        const categorytable = "create table if not exists category(category_id varchar(25) primary key,category_name varchar(40) unique)";
 
         mysqlConnection.query(categorytable,(err, result) => {
             if (err) throw err;
@@ -34,7 +34,7 @@ mysqlConnection.connect((err)=>{
         });
 
         //CREATING PRODUCT TABLE
-        const producttable = "create table if not exists product(p_id varchar(25) primary key,p_name varchar(50),unit_price integer,stock integer,description varchar(5000),quant_unit integer default 0,category_id varchar(25) references category(category_id))"
+        const producttable = "create table if not exists product(p_id varchar(25) primary key,p_name varchar(50),image varchar(2083),unit_price integer,stock integer,description varchar(5000),quant_unit integer default 0,category_id varchar(25) references category(category_id))"
             
         mysqlConnection.query(producttable,(err, result) => {
             if (err) throw err;

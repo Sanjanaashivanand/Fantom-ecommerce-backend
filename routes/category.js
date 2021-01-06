@@ -1,5 +1,4 @@
 var express = require('express');
-const mysqlConnection = require('../sqlconnection');
 var router = express.Router();
 const {createCategory,getCategoryById,getAllCategories,getACategory,UpdateCategory,DeleteCategory} = require("../controllers/category")
 const{isSignedIn,isAuthenticated,isAdmin} = require("../controllers/authentication");
@@ -21,9 +20,9 @@ router.get("/",getAllCategories);
 router.get("/:categoryId",getACategory);
 
 //UPDATE
-router.put("/:categoryId",UpdateCategory);
+router.put("/:categoryId/:userId",isSignedIn,isAuthenticated,isAdmin,UpdateCategory);
 
 //DELETE
-router.delete("/:categoryId",DeleteCategory);
+router.delete("/:categoryId/:userId",isSignedIn,isAuthenticated,isAdmin,DeleteCategory);
 
 module.exports = router 
