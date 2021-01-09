@@ -5,7 +5,7 @@ const _ = require("lodash");
 
 //TO SEARCH PRODUCT BY PARAMS
 exports.getProductById = (req,res,next,id) => {
-    sql="SELECT * FROM product WHERE p_id=?"
+    sql="SELECT * FROM product p natural join category c WHERE p.p_id=?"
     mysqlConnection.query(sql,[id],(err,rows,fields)=>{
         if(err || rows.length==0){
             return res.status(400).json({
@@ -46,7 +46,7 @@ exports.createProduct = (req,res) =>{
 
 //GET ALL PRODUCTS
 exports.getAllProducts = (req,res) => {
-    mysqlConnection.query("SELECT * from product",(err,rows,fields)=>{
+    mysqlConnection.query("SELECT * FROM product p",(err,rows,fields)=>{
         if(err){
             console.log("ERROR CAUGHT",err);
         }
@@ -68,10 +68,11 @@ exports.getProductsByCategory = (req,res)=>{
 
 //UPDATE PRODUCT
 exports.UpdateProduct = (req,res) => {
-    let sql=`REPLACE into product (p_id,p_name,image,unit_price,stock,description,quant_unit,category_id) value (?)`;
+    let sql=`REPLACE into product (category_id,p_id,p_name,image,unit_price,stock,description,quant_unit) value (?)`;
 
     let product = req.product;
     product = _.extend(product, req.body);
+    delete product.category_name
     let value = Object.values(product)
     
     mysqlConnection.query(sql,[value],(err,result,fields)=>{
@@ -94,6 +95,7 @@ exports.DeleteProduct = (req,res) => {
     const id = req.product.p_id
     mysqlConnection.query(sql,[id],(err,result,fields)=>{
         if(err){
+            console.log(err)
             return res.status(400).json({
                 error:"Deletion Failed"
             })

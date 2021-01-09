@@ -42,14 +42,15 @@ mysqlConnection.connect((err)=>{
         });
 
 
-        //CREATING CART TABLE
-        const carttable = " create table if not exists cart(cart_id varchar(25) primary key,user_id varchar(25) references user(user_id),p_name varchar(50) references product(p_name),p_number integer,total_bill integer)";
+        //CREATING ORDER TABLE
+        const ordertable = " create table if not exists orders(order_id varchar(25) primary key,user_id varchar(25) references user(user_id),products json,total_bill integer,address varchar(225),status varchar(25))";
 
-        mysqlConnection.query(carttable,(err, result) => {
+        mysqlConnection.query(ordertable,(err, result) => {
             if (err) throw err;
-            console.log("Cart Table created");
+            console.log("Order Table created");
         });
         
+
     }
 })
 

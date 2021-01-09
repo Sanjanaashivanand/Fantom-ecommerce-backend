@@ -14,7 +14,6 @@ exports.AllUsers= (req,res)=>{
 
 //SEARCH User by Id and set user profile
 exports.getUserById = (req,res,next,id)=>{
-    console.log(id)
     sql="SELECT * FROM user WHERE user_id=?"
     mysqlConnection.query(sql,[id],(err,rows,fields)=>{
         if(err || rows.length==0){
@@ -23,7 +22,6 @@ exports.getUserById = (req,res,next,id)=>{
               });
         }
         req.profile = rows[0];
-        console.log(req.profile);
         next();
         
     });
