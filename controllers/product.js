@@ -5,14 +5,14 @@ const _ = require("lodash");
 
 //TO SEARCH PRODUCT BY PARAMS
 exports.getProductById = (req,res,next,id) => {
-    sql="SELECT * FROM product p natural join category c WHERE p.p_id=?"
+    sql="call productByid(?)"
     mysqlConnection.query(sql,[id],(err,rows,fields)=>{
         if(err || rows.length==0){
             return res.status(400).json({
                 error: "No product was found in DB"
               });
         }
-        req.product = rows[0];
+        req.product = rows[0][0];
         next();
     })
 }
@@ -46,7 +46,7 @@ exports.createProduct = (req,res) =>{
 
 //GET ALL PRODUCTS
 exports.getAllProducts = (req,res) => {
-    mysqlConnection.query("SELECT * FROM product p",(err,rows,fields)=>{
+    mysqlConnection.query("SELECT * FROM product",(err,rows,fields)=>{
         if(err){
             console.log("ERROR CAUGHT",err);
         }

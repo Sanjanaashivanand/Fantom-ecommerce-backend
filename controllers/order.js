@@ -25,7 +25,7 @@ exports.createOrder = (req,res) => {
         id,
         req.profile.user_id,
         JSON.stringify(req.body.products),
-        req.body.total, //user_id: "lSZdF0VCuH", products: Array(3), total: 3000, address: "#69, my heart street, amsterdam"
+        req.body.total,
         req.body.address
     ]
     console.log("Backend values",values)
